@@ -1,7 +1,7 @@
 const Order = require("../models/orderModel");
 const User = require("../models/userModel"); // Add this import
 
-// ✅ Create a new order
+//  Create a new order
 exports.createOrder = async (req, res) => {
   try {
     // Extract customer details from the authenticated user
@@ -34,7 +34,7 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-// ✅ Get order by ID
+// Get order by ID
 exports.getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -46,7 +46,7 @@ exports.getOrderById = async (req, res) => {
   }
 };
 
-// ✅ Get all orders
+//  Get all orders
 exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find();
@@ -56,7 +56,7 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
-// ✅ Update order status
+//  Update order status
 exports.updateOrderStatus = async (req, res) => {
     try {
       const { status } = req.body;
@@ -75,7 +75,7 @@ exports.updateOrderStatus = async (req, res) => {
   };
   
 
-// ✅ Delete an order
+// Delete an order
 exports.deleteOrder = async (req, res) => {
   try {
     const order = await Order.findByIdAndDelete(req.params.id);
