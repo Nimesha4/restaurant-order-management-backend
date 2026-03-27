@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  app:
+  order-service:
     build: .
     ports:
-      - "5000:5000"
+      - "8002:8002"
     environment:
-      - PORT=5000
+      - PORT=8002
       - MONGO_URI=${MONGO_URI}
       - JWT_SECRET=${JWT_SECRET}
     volumes:
@@ -14,6 +14,13 @@ services:
     command: npm run dev
     depends_on:
       - mongo
+
+  api-gateway:
+    image: your-gateway-image
+    ports:
+      - "5000:5000"
+    depends_on:
+      - order-service
 
   mongo:
     image: mongo:latest

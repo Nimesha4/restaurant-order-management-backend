@@ -34,12 +34,16 @@ io.on("connection", (socket) => {
 
 app.set("io", io);
 
+app.get("'/", (req, res) => {
+ return  res.send({message : "Hello"});
+});
+
 // Routes
 app.use("/api/orders", orderRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/userdetails", userDetailsRoutes);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8002;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
