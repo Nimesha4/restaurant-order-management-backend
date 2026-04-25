@@ -4,12 +4,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { 
-    type: String, 
-    enum: ["customer", "user", "restaurantowner", "deliverypersonnel"], 
-    default: "customer", 
-    set: v => v && typeof v === 'string' ? v.toLowerCase() : v
-  },
+  role: { type: String, enum: ["Customer", "User" , "RestaurantOwner", "deliveryPersonnel"], default: "customer" },
 });
 
 const User = mongoose.model("User", userSchema);

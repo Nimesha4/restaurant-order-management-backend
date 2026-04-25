@@ -11,10 +11,13 @@ function generateToken(roleName, userId, email) {
         throw new Error("Jwt:SecretKey is missing in configuration.");
     }
 
+    // Always use lowercase for role
+    const normalizedRole = roleName.toLowerCase();
+
     const claims = {
         "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": userId.toString().trim(),
         "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": email,
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": roleName
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": normalizedRole
     };
 
     const options = {
