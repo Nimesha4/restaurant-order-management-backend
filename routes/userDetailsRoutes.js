@@ -8,7 +8,7 @@ const {
 const { authMiddleware } = require('../middleware/authMiddleware');
 
 router.post('/userdetails', authMiddleware, createUserDetails);
-router.put('/userdetails/:id/status', authMiddleware, updateOrderStatus);
+router.put('/:id/status', authMiddleware, updateOrderStatus);
 router.get('/userdetails/:id', authMiddleware, getUserDetailsByUserId);
 
 module.exports = router;
