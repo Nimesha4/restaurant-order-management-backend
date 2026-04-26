@@ -93,7 +93,8 @@ exports.updateOrderStatus = async (req, res) => {
     const rolePermissions = {
       restaurantowner: 'RestaurantOwner',
       deliver: 'RestaurantOwner',
-      customer: 'customerOrderRecive'
+      customer: 'customerOrderRecive',
+      user: 'RestaurantOwner' 
     };
 
     const allowedStatusType = rolePermissions[userRole];
