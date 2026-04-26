@@ -22,6 +22,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
           path: kubernetes
+          
+      # SonarCloud Scan (SAST)
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=Nimesha4_restaurant-order-management-backend
+            -Dsonar.organization=nimesha4
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=.
 
       # Step 3: Login to Docker Hub (FIXED - no echo issues)
       - name: Log in to Docker Hub
