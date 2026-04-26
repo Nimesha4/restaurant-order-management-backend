@@ -19,11 +19,11 @@ const { generateToken } = require("./middleware/generateToken");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
-  cors: { origin: "*", methods: ["GET", "POST"] },
+  cors: { origin: "https://glowing-sunshine-d907db.netlify.app/", methods: ["GET", "POST"] },
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: "https://glowing-sunshine-d907db.netlify.app/" }));
 app.use(bodyParser.json());
 
 // WebSocket
