@@ -10,27 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the current repository (Restaurant service code)
+      # Step 1: Checkout main repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # (Optional) Step 2: Clone Kubernetes Config Repository
+      # Step 2: Clone Kubernetes Config Repository
       - name: Clone Kubernetes Config Repository
         uses: actions/checkout@v3
         with:
-          repository: 'Deliveroo-System/ds-project-kubernetes'
+          repository: Deliveroo-System/ds-project-kubernetes
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
           path: kubernetes
 
-      # Step 3: Log in to Docker Hub
+      # Step 3: Login to Docker Hub (FIXED - no echo issues)
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-          # Step 4: Build the Docker image
+      # Step 4: Build Docker image
       - name: Build Docker image
         run: docker build -f Dockerfile -t vidura12/deliveroo:order-service-latest .
 
-      # Step 5: Push the Docker image to Docker Hub
-      - name: Push Docker image to Docker Hub
+      # Step 5: Push Docker image
+      - name: Push Docker image
         run: docker push vidura12/deliveroo:order-service-latest
